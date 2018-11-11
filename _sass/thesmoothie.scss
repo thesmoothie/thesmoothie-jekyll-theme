@@ -30,13 +30,5 @@ $scale-desktop: map-get($scales, scale-5);
 @import 'typography';
 @import 'media';
 @import "showgrid";
-
-body {
-	background-color: #ffeeee !important;
-	color: #333;
-}
-
-.container {
-	width: 100%;
-	max-width: 720px !important;
-}
+@import "layout";
+@import "logo";

@@ -1,0 +1,52 @@
+html,
+body,
+.app {
+	min-height: 100vh;
+}
+
+.app {
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+
+	&__header {
+		padding: 2rem 0;
+	}
+
+	&__content {
+		flex: 1 0 auto;
+	
+		*:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	&__footer {
+		padding: 6rem 2rem;
+		background: #eee;
+		display: flex;
+		justify-content: center;
+	}
+}
+
+.container {
+	width: 100%;
+	max-width: 960px !important;
+	margin: 0 auto;
+}
+
+.page,
+.post {
+	width: 100%;
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 4rem;
+}
+
+.full-width {
+	width: 100%;
+	max-width: 100%;
+	margin: 0 auto;
+	padding: 4rem;
+}

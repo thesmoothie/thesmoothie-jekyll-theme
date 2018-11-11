@@ -1,0 +1,38 @@
+.app__logo {
+	display: flex;
+	align-items: center;
+	margin: 0 1rem;
+
+	a:hover {
+		text-decoration: none;
+	}
+
+	&__image #logo-the-smoothie__path-2 {
+		fill: green !important;
+		animation: color-pulse 10s infinite;
+		-moz-animation: color-pulse 10s infinite; /* Firefox */
+		-webkit-animation: color-pulse 10s infinite; /* Safari and Chrome */
+	}
+
+	&__title {
+		font-family: $font-headers;
+		font-size: 3rem;
+		margin-top: 2rem;
+		font-weight: 700;
+		
+		a {
+			color: red;
+			animation: color-pulse 10s infinite;
+			-moz-animation: color-pulse 10s infinite; /* Firefox */
+			-webkit-animation: color-pulse 10s infinite; /* Safari and Chrome */	
+		}
+	}
+}
+
+@keyframes color-pulse /* Safari and Chrome */ {
+	0% {fill:rgb(255, 100, 100); color:rgb(255, 100, 100);}
+	25% {fill:rgb(100, 255, 190); color:rgb(100, 255, 190);}
+	50% {fill:rgb(56, 190, 243); color:rgb(56, 190, 243);}
+	750% {fill:rgb(229, 100, 255); color:rgb(229, 100, 255);}
+	100% {fill:rgb(255, 100, 100); color:rgb(255, 100, 100);}
+}
