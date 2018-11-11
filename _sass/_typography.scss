@@ -1,0 +1,252 @@
+// change the second parameter to set a different font cap-height preset
+// baseline calculation = font-size * (line-height - cap-height) / 2
+// $cap-height: map-get($cap-heights, helvetica-neue);
+
+$cap-heights: (
+	helvetica-neue: 0.73,
+	helvetica: 0.71,
+	arial: 0.71,
+  	telegrotesk-screen: 0.75,
+  	gilroy: 0.74,
+  	courier-new: 0.71,
+) !default;
+
+$font-family: 'Helvetica Neue';
+$font-headers: 'Gilroy', sans-serif;
+$font-code: 'Courier New', monospace;
+
+html {
+	box-sizing: border-box;
+	font-family: $font-family;
+	font-size: $base-fontsize;
+	line-height: 2rem;
+	font-weight: 400;
+	overflow-x: hidden;
+	vertical-align: bottom;
+}
+
+body {
+	font-size: 2rem;
+}
+
+// Font size function
+@function _font-size($level: 0, $scale: $scale-mobile) {
+	$value: 1;
+	@if $level > 0 {
+		@for $i from 1 through $level {
+			$value: $value * $scale;
+		}
+	}
+	@return $value;
+}
+// Font size getter
+@function font-size($level: 0, $scale: $scale-mobile) {
+	@return rem-to-px(_font-size($level, $scale));
+}
+
+// Line height function
+@function _line-height($font-size: 1) {
+	@return ceil($font-size + 0.3);
+}
+// Line height getter
+@function line-height($font-size: 1, $scale: $scale-mobile) {
+	@return rem-to-px(_line-height(_font-size($font-size, $scale)));
+}
+
+// 16 24 6
+// font-size * (line-height - cap-height) / 2
+// 16 * (24 - (16 * 0.73)) / 2
+// 16 * 12.48 / 2
+// 197.12 / 2
+// 98.56
+@function padding-top($font-size: 2, $cap-height: 0.72) {
+	@return ceil(($font-size - $cap-height) / 2 * 10) / 10 * 1rem;
+}
+@function padding-bottom($font-size: 2, $cap-height: 0.72) {
+	@return 1rem - padding-top($font-size, $cap-height);
+}
+
+// Heading default styles
+@mixin heading() {
+	color: $color-headings;
+	font-family: $font-family;
+	font-weight: 700;
+	letter-spacing: -.0075em;
+	margin: 0;
+}
+
+h1 {
+	@include heading();
+	font-size: font-size(6);
+	line-height: line-height(6);
+	
+	@media(min-width: 767px) {
+		font-size: font-size(6, $scale-tablet);
+		line-height: line-height(6, $scale-tablet);
+	}
+	
+	@media(min-width: 1024px) {
+		font-size: font-size(6, $scale-desktop);
+		line-height: line-height(6, $scale-desktop);
+	}
+}
+
+h2 {
+	@include heading();
+	font-size: font-size(5);
+	line-height: line-height(5);
+	
+	@media(min-width: 767px) {
+		font-size: font-size(5, $scale-tablet);
+		line-height: line-height(5, $scale-tablet);
+	}
+	
+	@media(min-width: 1024px) {
+		font-size: font-size(5, $scale-desktop);
+		line-height: line-height(5, $scale-desktop);
+	}
+}
+
+h3 {
+	@include heading();
+	font-size: font-size(4);
+	line-height: line-height(4);
+	
+	@media(min-width: 767px) {
+		font-size: font-size(4, $scale-tablet);
+		line-height: line-height(4, $scale-tablet);
+	}
+	
+	@media(min-width: 1024px) {
+		font-size: font-size(4, $scale-desktop);
+		line-height: line-height(4, $scale-desktop);
+	}
+}
+
+h4 {
+	@include heading();
+	font-size: font-size(3);
+	line-height: line-height(3);
+	
+	@media(min-width: 767px) {
+		font-size: font-size(3, $scale-tablet);
+		line-height: line-height(3, $scale-tablet);
+	}
+	
+	@media(min-width: 1024px) {
+		font-size: font-size(3, $scale-desktop);
+		line-height: line-height(3, $scale-desktop);
+	}
+}
+
+h5 {
+	@include heading();
+	font-size: font-size(2);
+	line-height: line-height(2);
+	
+	@media(min-width: 767px) {
+		font-size: font-size(2, $scale-tablet);
+		line-height: line-height(2, $scale-tablet);
+	}
+	
+	@media(min-width: 1024px) {
+		font-size: font-size(2, $scale-desktop);
+		line-height: line-height(2, $scale-desktop);
+	}
+}
+
+h6 {
+	@include heading();
+	font-size: font-size(1);
+	line-height: line-height(1);
+	
+	@media(min-width: 767px) {
+		font-size: font-size(1, $scale-tablet);
+		line-height: line-height(1, $scale-tablet);
+	}
+	
+	@media(min-width: 1024px) {
+		font-size: font-size(1, $scale-desktop);
+		line-height: line-height(1, $scale-desktop);
+	}
+}
+
+p {
+	font-size: 2rem;
+	line-height: 3rem;
+	padding-top: padding-top();
+	padding-bottom: padding-bottom();
+	margin-bottom: 2rem;
+}
+
+ul,
+ol {
+	font-size: 2rem;
+	line-height: 3rem;
+	padding-left: 2rem;
+}
+
+ul li,
+ol li {
+	padding-left: 2em;
+}
+
+hr {
+	border: 0;
+	border-bottom: 4px solid #dfdfdf;
+	max-width: 4rem;
+	padding-top: calc(2rem - 4px);
+	margin-bottom: 2rem;
+}
+
+br {
+	line-height: 2rem;
+}
+
+blockquote {
+	line-height: 4rem;
+	padding-left: 2rem;
+	border-left: 4px solid $color-secondary;
+	font-style: italic;
+}
+@media (min-width: 1024px) {
+	blockquote {
+		margin-left: -2rem;
+	}
+}
+
+pre {
+	font-family: "Courier New", monospace;
+	background: #eee;
+	overflow-x: scroll;
+	border-radius: 3px;
+	font-size: 1.8rem;
+	margin-bottom: 1.3rem;
+	padding-bottom: 1.2rem;
+	padding-top: 1.5rem;
+	padding-left: 2rem;
+	padding-right: 2rem;
+	line-height: 4rem;
+}
+
+div {
+	line-height: 2rem;
+}
+
+a {
+	text-decoration: none;
+	color: $color-secondary;
+	transition: all .1s ease-out;
+}
+
+a:hover {
+	color: darken($color-secondary, 25%);
+}
+
+.text {
+	// background: rgba(blue, 0.2);
+	padding-top: 13px;
+	padding-bottom: 3px;
+	vertical-align: baseline;
+	line-height: 32px !important;
+}

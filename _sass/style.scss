@@ -1,4 +1,43 @@
+
+$unit: 8px;
+
+// default font-size for calculations
+$base-fontsize: $unit;
+
+// scales
+$scales: (
+	scale-0: 1,			// one
+	scale-1: 1.067,		// minor second
+	scale-2: 1.125,		// major second
+	scale-3: 1.2,		// minor third
+	scale-4: 1.25,		// major third
+	scale-5: 1.333,		// perfect fourth
+	scale-6: 1.414,		// augmented fourth
+	scale-7: 1.5,		// perfect fifth
+	scale-8: 1.618,		// golden ratio
+	scale-9: 2,			// double
+) !default;
+
+// change the second parameter to set a different scale
+$scale-mobile: map-get($scales, scale-4);
+$scale-tablet: map-get($scales, scale-5);
+$scale-desktop: map-get($scales, scale-5);
+
+// imports
+@import 'utilities';
+@import 'reset';
+@import 'colors-lookup-table';
+@import 'colors';
+@import 'typography';
+@import 'media';
+@import "showgrid";
+
 body {
 	background-color: #ffdddd !important;
 	color: #333;
+}
+
+.container {
+	width: 100%;
+	max-width: 720px !important;
 }

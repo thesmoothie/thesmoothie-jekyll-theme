@@ -1,0 +1,51 @@
+/**
+	* Calculate the luminance for a color.
+	* See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
+	*/
+@function luminance($color) {
+	$red: nth($linear-channel-values, red($color) + 1);
+	$green: nth($linear-channel-values, green($color) + 1);
+	$blue: nth($linear-channel-values, blue($color) + 1);
+	
+	@return .2126 * $red + .7152 * $green + .0722 * $blue;
+}
+  
+/**
+	* Calculate the contrast ratio between two colors.
+	* See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
+	*/
+@function contrast($back, $front, $tolerance: 0.5) {
+	$backLum: luminance($back) + $tolerance;
+	$foreLum: luminance($front) + $tolerance;
+	
+	@return max($backLum, $foreLum) / min($backLum, $foreLum);
+}
+
+/**
+	* Determine whether to use dark or light text on top of given color.
+	* Returns black for dark text and white for light text.
+	*/
+@function contrast-color($color, $white: white, $black: black, $tolerance: 0.5) {
+	$lightContrast: contrast($color, $white, $tolerance);
+	$darkContrast: contrast($color, $black, $tolerance);
+
+	@if ($lightContrast > $darkContrast) { 
+		@return $white; 
+	} @else { 
+		@return $black; 
+	}
+}
+
+$color-primary: rgb(46, 178, 255) !default;
+$color-secondary: #f16ba3 !default;
+$color-headings: #023 !default;
+$color-text: #546B77 !default;
+
+$colors: (
+	primary: $color-primary,
+	secondary: $color-secondary,
+	info: blue,
+	success: green,
+	warning: orange,
+	danger: red,
+) !default;
